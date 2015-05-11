@@ -89,16 +89,23 @@ append_to_output(const unsigned char *data, size_t len) {
       }
     }
   }
-
+  if(*data == '1'){
+   	fwrite(time_buf, 1, 19, file);      
+    	fputc('\n', file);
+	printf("1\n");
+  }
+  /*
   do {
     written = fwrite(data, 1, len, file); //write data into file n elements of size 1. 
                                           //written is the number of elements written. 
     len -= written;
     data += written;
   } while ( written && len );
+  
     fputc('\t', file);
     fwrite(time_buf, 1, 19, file);      
     fputc('\n', file);
+  */
   fflush(file);
 
   return 0;
