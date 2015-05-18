@@ -1,3 +1,2 @@
-This is a test server made with libcoap (see http://libcoap.sf.net)
-Copyright (C) 2010--2013 Olaf Bergmann <bergmann@tzi.org>
+This
 

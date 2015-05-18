@@ -73,11 +73,12 @@ append_to_output(const unsigned char *data, size_t len) {
   time_t timer;
   char time_buf[26];
   struct tm* tm_info;
+  int data_zero_count = 0;
 
   time(&timer);
   tm_info = localtime(&timer);
   
-  strftime(time_buf, 26, "%Y:%m:%d %H:%M:%S", tm_info);
+  strftime(time_buf, 26, "%Y/%m/%d %H:%M:%S", tm_info);
  
   if (!file) {
     if (!output_file.s || (output_file.length && output_file.s[0] == '-')) 
@@ -89,10 +90,17 @@ append_to_output(const unsigned char *data, size_t len) {
       }
     }
   }
-  if(*data == '1'){
-   	fwrite(time_buf, 1, 19, file);      
-    	fputc('\n', file);
-	printf("1\n");
+  if(*data == '0'){ 
+	printf("0\n");
+	data_zero_count = 0;
+  }
+  else if(*data == '1'){
+	if(data_zero_count == 0){
+   		fwrite(time_buf, 1, 19, file);      
+    		fputc('\n', file);
+		printf("1\n");
+		data_zero_count++;
+	}
   }
   /*
   do {
